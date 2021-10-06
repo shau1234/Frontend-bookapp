@@ -30,6 +30,7 @@ import Nav from "./components/nav";
 import { Switch, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.css";
 import UserLogin from "./components/userlogin";
+import Users from "./components/users";
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
       <Switch>
         <Route exact path="/register" component={Register} />
         <Route exact path="/userlogin" component={UserLogin} />
+        <Route exact path="/users" component={Users}/>
         </Switch>
     </div>
   );
