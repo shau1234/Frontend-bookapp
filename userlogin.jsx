@@ -1,15 +1,15 @@
 import React, { Component } from "react";
-import { TextField, Button, Paper, Typography, Box } from "@material-ui/core";
+import { TextField, Button, Paper, Typography,InputLabel,  FormControl,
+    Select,Box } from "@material-ui/core";
 import axios from "axios";
 import  Joi  from "joi-browser";
 
 class UserLogin extends React.Component {
   state = {
     user: {
-      userId: "",
       email: "",
       password: "",
-      role: "",
+      role:""
     },
     errors: {},
     errMsg: "",
@@ -17,23 +17,17 @@ class UserLogin extends React.Component {
 
   // schema to validate
   schema = {
-    userId: Joi.number().min(1000).required(),
-    email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com'] } }),
-    password: Joi.string().min(3).max(8).required(),
-    role: Joi.string().min(10).alphanum().required(),
+    email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com'] } }).required(),
+    password: Joi.string().min(3).max(15).required(),
+    role:Joi.string().min(3).max(30).alphanum().required(),
   };
   handleChange = (event) => {
     // event.target.name - name of field
     // event.target.value - value entered by the user
     //this.setState({ [event.target.name]: event.target.value }); userId,id
     const user = { ...this.state.user };
-    //post["userId"] = 1001;
-    //post["id"] = 200;
-    //post["title"] = "Post 200";
-    //post.body = "Post 200 body";
     console.log(user);
-    //post[userId] = 100
-    //post[]
+   
     user[event.target.name] = event.target.value;
     this.setState({ user: user });
     this.setState({ user });
@@ -62,36 +56,34 @@ class UserLogin extends React.Component {
   handleSubmit = (event) => {
     event.preventDefault();
     console.log("handleSubmit");
-    // const post = {
-    //   userId: this.state.userId,
-    //   id: this.state.id,
-    //   title: this.state.title,
-    //   body: this.state.body,
-    // };
-    const errors = this.validate(); // null / errors
-    // Set state error object with errors or empty object based on
-    // errors return by the validate() method
+    const errors = this.validate(); 
     this.setState({ errors: errors || {} });
     // if errors exists in the form , return to the login page
     console.log(errors);
-
     if (errors) return;
-    /*axios
-      .post("https://jsonplaceholder.typicode.com/posts", this.state.user)
+
+    const user={
+        "email": this.state.user.email,
+        "password": this.state.user.password,
+        "role": this.state.user.role
+
+    }
+    axios
+      .post("http://localhost:8082/login", user)
       .then((res) => {
         console.log(res.data);
         alert("User Loggedin successfully!!");
-        this.props.history.push("/posts");
+        this.props.history.push("/books");
       })
       .catch((error) => {
         console.log(error);
-        this.setState({ errMsg: error.res.data.message });
-      });*/
+        //this.setState({ errMsg: error.res.data.message });
+      });
   };
   render() {
     return (
       <div>
-        <Typography variant="h3">User Login</Typography>
+        <Typography variant="h3">Login</Typography>
         {this.state.errMsg && (
           <div className="alert alert-danger" role="alert">
             {this.state.errMsg}
@@ -107,21 +99,8 @@ class UserLogin extends React.Component {
           onSubmit={this.handleSubmit}
         >
           <Paper elevation={3} style={{ padding: "15px" }}>
-            <TextField
-              id="filled-basic"
-              label="User Id"
-              variant="standard"
-              fullWidth
-              style={{ marginBottom: "10px" }}
-              name="userId"
-              value={this.state.userId}
-              onChange={this.handleChange}
-            />
-            {this.state.errors && (
-              <p className="text-danger font-monospace text-start">
-                {this.state.errors.userId}
-              </p>
-            )}
+            
+            
             <TextField
               id="filled-basic"
               label="Email"
@@ -152,16 +131,28 @@ class UserLogin extends React.Component {
                 {this.state.errors.password}
               </p>
             )}
-            <TextField
-              id="filled-basic"
-              label="Role"
-              variant="standard"
+            
+            <FormControl
+              variant="filled"
               fullWidth
-              style={{ marginBottom: "10px" }}
-              name="role"
-              value={this.state.role}
-              onChange={this.handleChange}
-            />
+              style={{ marginBottom: 10 }}
+            >
+              <InputLabel htmlFor="filled-age-native-simple">Role</InputLabel>
+              <Select
+                native
+                value={this.state.role}
+                name="role"
+                onChange={this.handleChange}
+                inputProps={{
+                  name: "role",
+                  id: "filled-age-native-simple",
+                }}
+              >
+                <option aria-label="None" value="" />
+                <option value="customer">Customer</option>
+                <option value="admin">Admin</option>
+              </Select>
+            </FormControl>
             {this.state.errors && (
               <p className="text-danger font-monospace text-start">
                 {this.state.errors.role}
@@ -170,7 +161,7 @@ class UserLogin extends React.Component {
             <Button
               type="submit"
               variant="contained"
-              color="secondary"
+              color="primary"
               fullWidth
             >
               Submit

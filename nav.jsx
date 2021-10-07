@@ -44,6 +44,16 @@ const Nav = () => {
                 </NavLink>
               
                </li>
+               <li className="nav-item">
+                <NavLink className="nav-link" to="/books">
+                  Book
+                </NavLink>
+                </li>
+                <li className="nav-item">
+                <NavLink className="nav-link" to="/categories">
+                  Category
+                </NavLink>
+                </li>
                         </ul>
                         </div>
                     </div>
