@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from "axios";
 
-//import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
     Table,
     TableBody,
@@ -10,11 +10,15 @@ import {
     TableHead,
     TableRow,
     Paper,
-    
+    Box,
     Container,
    
 } from '@material-ui/core';
+import Button from "@material-ui/core/Button";
 
+//import Container from "@material-ui/core/Container";
+import DeleteIcon from "@material-ui/icons/Delete";
+import UpdateIcon from "@material-ui/icons/Update";
 
 class Users extends React.Component {
     
@@ -33,7 +37,16 @@ class Users extends React.Component {
     render() { 
         return (<div>
             <Container>
-          
+            
+          <Box
+            style={{ float: "right", marginTop: "20px", marginBottom: "10px" }}
+          >
+            <Link to="/adduser">
+            <Button variant="outlined" color="primary">
+              Add User
+            </Button>
+            </Link>
+          </Box>
           <TableContainer
             component={Paper}
             elevation={3}
@@ -49,9 +62,8 @@ class Users extends React.Component {
                   
                   <TableCell >UserId</TableCell>
                   <TableCell >Email</TableCell>
-                  <TableCell >Password</TableCell>
-                 
-                  <TableCell >Role</TableCell>
+                   <TableCell >Role</TableCell>
+                   <TableCell >Actions</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -62,8 +74,19 @@ class Users extends React.Component {
                     </TableCell>
                     
                     <TableCell >{user.email}</TableCell>
-                    <TableCell >{user.password}</TableCell>
+                    
                     <TableCell >{user.role}</TableCell>
+                    <TableCell align="right">
+                      <Box flexDirection="row">
+                        <Button variant="contained" color="primary">
+                          <UpdateIcon />
+                        </Button>
+                        <Button variant="contained" color="secondary">
+                          <DeleteIcon />
+                        </Button>
+                      </Box>
+                    </TableCell>
+                    
                     
                   </TableRow>
                 ))}

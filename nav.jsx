@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { NavLink } from "react-router-dom";
-import UserLogin from "./userlogin";
+//import Register from './register';
+import { useSelector } from "react-redux";
 
 const Nav = () => {
+  const login = useSelector((state) => state.login);
     return (
         <div>
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -32,18 +34,16 @@ const Nav = () => {
                   Register
               </NavLink>
               </li>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/userlogin">
-                  Login
-                </NavLink>
-              
-               </li>
+            
+                
+                {login.loggedIn && (
                <li className="nav-item">
                 <NavLink className="nav-link" to="/users">
                   Users
                 </NavLink>
               
                </li>
+                )}
                <li className="nav-item">
                 <NavLink className="nav-link" to="/books">
                   Book
@@ -54,7 +54,32 @@ const Nav = () => {
                   Category
                 </NavLink>
                 </li>
+                <li className="nav-item">
+                <NavLink className="nav-link" to="/bookorders">
+                  BookOrder
+                </NavLink>
+                </li>
+                <li className="nav-item">
+                <NavLink className="nav-link" to="/orderdetails">
+                  OrderDetail
+                </NavLink>
+                </li>
                         </ul>
+                        <ul className="navbar-nav mb-2">
+              {login.loggedIn ? (
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="/logout">
+                    Logout
+                  </NavLink>
+                </li>
+              ) : (
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="/login">
+                    Login
+                  </NavLink>
+                </li>
+              )}
+              </ul>
                         </div>
                     </div>
                     </nav>

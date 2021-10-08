@@ -29,8 +29,22 @@ import Register from "./components/register";
 import Nav from "./components/nav";
 import { Switch, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.css";
-import UserLogin from "./components/userlogin";
+import Login from "./components/login";
 import Users from "./components/users";
+import Book from "./components/books";
+import AddBook from "./components/addbook";
+import UpdateBook from "./components/updatebook";
+import Category from "./components/categories";
+import AddCategory from "./components/addcategory";
+import UpdateCategory from "./components/updatecategory";
+import BookOrder from "./components/bookorders";
+import AddBookOrder  from "./components/addbookorder";
+import UpdateBookOrder from "./components/updatebookorder";
+import OrderDetail from "./components/orderdetails";
+import AddOrderDetail  from "./components/addorderdetail";
+import UpdateOrderDetail from "./components/updateorderdetail";
+import Logout from "./components/logout";
+import AddUser from "./components/adduser";
 
 function App() {
   return (
@@ -40,8 +54,22 @@ function App() {
       
       <Switch>
         <Route exact path="/register" component={Register} />
-        <Route exact path="/userlogin" component={UserLogin} />
+        <Route exact path="/login" component={Login} />
         <Route exact path="/users" component={Users}/>
+        <Route path="/books" component={Book} />
+      <Route path="/addbook" component={AddBook} />
+      <Route path="/update/:bookId" component={UpdateBook} />
+      <Route path="/categories" component={Category} />
+      <Route path="/addcategory" component={AddCategory} />
+      <Route path="/update/:categoryId" component={UpdateCategory} />
+      <Route path="/bookorders" component={BookOrder} />
+      <Route path="/addbookorder" component={AddBookOrder} />
+      <Route path="/update/:orderId" component={UpdateBookOrder} />
+      <Route path="/orderdetails" component={OrderDetail} />
+      <Route path="/addorderdetail" component={AddOrderDetail} />
+      <Route path="/update/:quantity" component={UpdateOrderDetail} />
+      <Route path="/logout" component={Logout} />
+      <Route path="/adduser" component={AddUser} />
         </Switch>
     </div>
   );
