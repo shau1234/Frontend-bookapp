@@ -91,7 +91,9 @@ class Users extends React.Component {
                     <TableCell align="right">
                       <Box flexDirection="row">
                         <Button variant="contained" color="primary">
+                        <Link to={`/update/user/${user.userId}`}>
                           <UpdateIcon />
+                          </Link>
                         </Button>
                         <Button variant="contained" color="secondary" onClick={ () => this.handleDelete(user.userId)}>
                           <DeleteIcon />

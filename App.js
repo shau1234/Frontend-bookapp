@@ -45,6 +45,7 @@ import AddOrderDetail  from "./components/addorderdetail";
 import UpdateOrderDetail from "./components/updateorderdetail";
 import Logout from "./components/logout";
 import AddUser from "./components/adduser";
+import UpdateUser from "./components/updateuser";
 
 function App() {
   return (
@@ -58,18 +59,19 @@ function App() {
         <Route exact path="/users" component={Users}/>
         <Route path="/books" component={Book} />
       <Route path="/addbook" component={AddBook} />
-      <Route path="/update/:bookId" component={UpdateBook} />
+      <Route path="/update/book/:bookId" component={UpdateBook} />
       <Route path="/categories" component={Category} />
       <Route path="/addcategory" component={AddCategory} />
-      <Route path="/update/:categoryId" component={UpdateCategory} />
+      <Route path="/update/category/:categoryId" component={UpdateCategory} />
       <Route path="/bookorders" component={BookOrder} />
       <Route path="/addbookorder" component={AddBookOrder} />
-      <Route path="/update/:orderId" component={UpdateBookOrder} />
+      <Route path="/update/order/:orderId" component={UpdateBookOrder} />
       <Route path="/orderdetails" component={OrderDetail} />
       <Route path="/addorderdetail" component={AddOrderDetail} />
-      <Route path="/update/:quantity" component={UpdateOrderDetail} />
+      <Route path="/update/quantity/:quantity" component={UpdateOrderDetail} />
       <Route path="/logout" component={Logout} />
       <Route path="/adduser" component={AddUser} />
+      <Route path="/update/user/:userId" component={UpdateUser} />
         </Switch>
     </div>
   );
