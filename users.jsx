@@ -33,6 +33,18 @@ class Users extends React.Component {
             .catch((error) => console.log(error));
     }
     
+    handleDelete = (userId) =>{
+      console.log(userId);
+      axios
+    .delete(`http://localhost:8082//users/${userId}`)
+      .then((res) => {
+        alert("Deleted user successfully!");
+        console.log(res);
+        const users =this.state.users.filter((u) => u.userId != userId);
+        this.setState({users : users})
+       })
+       .catch((error) => console.log(error));
+       };
 
     render() { 
         return (<div>
@@ -81,7 +93,7 @@ class Users extends React.Component {
                         <Button variant="contained" color="primary">
                           <UpdateIcon />
                         </Button>
-                        <Button variant="contained" color="secondary">
+                        <Button variant="contained" color="secondary" onClick={ () => this.handleDelete(user.userId)}>
                           <DeleteIcon />
                         </Button>
                       </Box>
